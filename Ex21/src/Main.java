@@ -6,12 +6,17 @@
 public class Main {
     public static void main(String[] args) {
 
-        int x=6;
-        System.out.println(x);
+        int startingValue = 6;
+        int numberOfValues = 3;
+      cicla(startingValue,numberOfValues);
 
-        for (int i=0; i<2; i++) {
-            int y = --x;
-            System.out.println(y);
+    }
+
+    public static void cicla(int x, int y) {
+        System.out.println(x);
+        for (int i = 1; i < y; i++) {
+            System.out.println(--x);
         }
     }
+
 }
