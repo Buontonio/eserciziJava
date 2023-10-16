@@ -1,6 +1,6 @@
 public class Forma {
 
     public double calcoloArea(double x, double y) {
-        return x*y/2;
+        return 0.0;
     }
 }
