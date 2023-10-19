@@ -4,13 +4,15 @@
 public class Main {
     public static void main(String[] args) throws Exception {
 
-        int x = 15;
-        rangeChecker(x);
+        int bottomValue = 5;
+        int topValue = 25;
+        int value = 4;
+        rangeChecker(bottomValue, topValue, value);
 
     }
 
-    public static boolean rangeChecker(int x) throws Exception {
-        if (x >= 0 && x <= 10) {
+    public static boolean rangeChecker(int bottomValue, int topValue, int value) throws Exception {
+        if (bottomValue <= value && value <= topValue) {
             System.out.println("The number is within the range");
         } else throw new Exception("The number is out of range");
         return false;
