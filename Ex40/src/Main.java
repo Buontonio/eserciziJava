@@ -2,8 +2,12 @@
 public class Main {
     public static void main(String[] args) throws Exception {
 
-        char x = '3';
-        charChecker(x);
+        char x = 'c';
+        try {
+            charChecker(x);
+        }catch (Exception e){
+            System.out.printf(String.valueOf(e));
+        }
     }
 
     public static void charChecker(char x) throws Exception {
