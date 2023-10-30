@@ -13,22 +13,30 @@ public class Main {
         Numeri num1 = new Numeri();
         num1.setValue(50);
 
-        Set<Integer> integers = new HashSet<Integer>();
+        Set<Integer> integers = new HashSet<>();
 
         System.out.println("Your integer values are: ");
         setIntFiller(integers);
         integers.add(num1.getValue());
-        System.out.println("Does the HashSet contains value \""+num1.getValue()+"\"? "+integers.contains(num1.getValue()));
+        System.out.println(valueChecker(integers, num1));
         System.out.println(integers);
 
     }
 
-    public static Set<Integer> setIntFiller(Set<Integer> set){
+    public static Set<Integer> setIntFiller(Set<Integer> set) {
         Random r = new Random();
-        for(int i=0; i<5; i++){
-            set.add(r.nextInt(1,500));
+        for (int i = 0; i < 5; i++) {
+            set.add(r.nextInt(1, 500));
         }
         System.out.println(set);
         return set;
+    }
+
+    public static boolean valueChecker(Set<Integer> set, Numeri num) {
+        System.out.println("Does the HashSet contains value " + num.getValue() + ":");
+        if (set.contains(num.getValue())) {
+            return true;
+        }
+        return false;
     }
 }
