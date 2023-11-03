@@ -1,5 +1,7 @@
-import java.sql.SQLOutput;
-import java.time.LocalDate;
+//Crea un oggetto OffsetDateTime da questa stringa 2002-03-01T13:00:00Z
+//Formatta la data ottenuta in FULL, MEDIUM e SHORT
+//Stampa le varie versioni
+
 import java.time.OffsetDateTime;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
@@ -8,15 +10,23 @@ import java.time.format.FormatStyle;
 public class Main {
     public static void main(String[] args) {
 
-        ZonedDateTime zonedDateTime = OffsetDateTime.parse("2002-03-01T13:00:00Z").toZonedDateTime();
-        OffsetDateTime date = OffsetDateTime.parse("2002-03-01T13:00:00Z");
+        ZonedDateTime date1 = OffsetDateTime.parse("2002-03-01T13:00:00Z").toZonedDateTime();
 
-        String first = zonedDateTime.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.FULL));
-        String second = date.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM));
-        String third = date.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT));
+        System.out.println(fullFormatter(date1));
+        System.out.println(mediumFormatter(date1));
+        System.out.println(shortFormatter(date1));
 
-        System.out.println(first);
-        System.out.println(second);
-        System.out.println(third);
+    }
+
+    public static String fullFormatter(ZonedDateTime date) {
+        return date.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.FULL));
+    }
+
+    public static String mediumFormatter(ZonedDateTime date) {
+        return date.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM));
+    }
+
+    public static String shortFormatter(ZonedDateTime date) {
+        return date.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT));
     }
 }
