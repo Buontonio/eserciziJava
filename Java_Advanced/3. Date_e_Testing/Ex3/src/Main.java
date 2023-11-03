@@ -13,16 +13,26 @@ public class Main {
 
         OffsetDateTime date = OffsetDateTime.parse("2023-03-01T13:00:00Z");
 
-        String getYear = String.valueOf(date.getYear());
-        String getMonth = String.valueOf(date.getMonth());
-        String getDay = String.valueOf(date.getDayOfMonth());
-        String getDayOfWeek = String.valueOf(date.getDayOfWeek());
+        System.out.println(getYear(date));
+        System.out.println(getMonth(date));
+        System.out.println(getDay(date));
+        System.out.println(getDayOfWeek(date));
 
+    }
 
-        System.out.println(getYear);
-        System.out.println(getMonth);
-        System.out.println(getDay);
-        System.out.println(getDayOfWeek);
+    public static String getYear(OffsetDateTime date){
+        return String.valueOf(date.getYear());
+    }
 
+    public static String getMonth(OffsetDateTime date){
+        return String.valueOf(date.getMonth());
+    }
+
+    public static String getDay(OffsetDateTime date){
+        return String.valueOf(date.getDayOfMonth());
+    }
+
+    public static String getDayOfWeek(OffsetDateTime date){
+        return String.valueOf(date.getDayOfWeek());
     }
 }
