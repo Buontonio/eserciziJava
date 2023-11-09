@@ -4,9 +4,12 @@
 //      Il tipo di operazione, i due dati in input e il risultato dovranno essere stampati a schermo
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public class Main {
     public static void main(String[] args) {
+
+        BigDecimal val1 = BigDecimal.valueOf(4).setScale(2, RoundingMode.DOWN);
 
 
         Expression exp1 = new Expression(BigDecimal.valueOf(8), BigDecimal.valueOf(4), Expression.Operator.SUM);
