@@ -19,10 +19,10 @@ public class NameController {
     }
 
     @PostMapping(path = "/reversedName")
-    public String reversedName(@RequestParam () String name) {
+    public StringBuilder reversedName(@RequestBody NameDTO nameDTO) {
 
 
-        StringBuilder finalWord = new StringBuilder(name);
-        return finalWord.reverse().toString();
+        StringBuilder finalWord = new StringBuilder(((nameDTO.getName())));
+        return finalWord.reverse();
     }
 }
