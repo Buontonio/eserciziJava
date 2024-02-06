@@ -1,55 +1,97 @@
 package com.example.Ex1.service;
 
-import com.example.Ex1.ent.StudentEnt;
-import com.example.Ex1.repo.StudentRepo;
-import jakarta.transaction.Transactional;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
+import com.example.Ex1.entities.StudentEntity;
+import com.example.Ex1.repositories.StudentRepository;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-@ActiveProfiles(value = "test")
-@RunWith(SpringJUnit4ClassRunner.class)
+import static org.assertj.core.api.Assertions.assertThat;
+
 @SpringBootTest
-public class StudentServiceTest {
+@ActiveProfiles(value = "test")
+class StudentServiceTest {
 
     @Autowired
     private StudentService studentService;
+
     @Autowired
-    private StudentRepo studentRepo;
+    private StudentRepository studentRepository;
 
+    private StudentEntity createNewStudent() {
+        StudentEntity student = new StudentEntity();
+        student.setName("Antonio");
+        student.setSurname("Buonanno");
+        student.setIsWorking(false);
 
-    @Test
-    public void updateStudentEmploymentStatusInvalidId() {
-
-        Optional<StudentEnt> result = studentService.updateStudentEmploymentStatus(-5, true);
-        assertEquals(result,Optional.empty());
+        return studentRepository.saveAndFlush(student);
     }
 
-    @Transactional
     @Test
-    public void updateStudentEmploymentStatus() {
+    void createNewStudentTest() throws Exception {
 
-        StudentEnt stud = new StudentEnt();
-        stud.setName("Pippo");
-        stud.setSurname("Pippa");
-        stud.setIsWorking(false);
+        StudentEntity student = new StudentEntity();
+        student.setName("Anto");
+        student.setSurname("Troiano");
+        student.setIsWorking(false);
 
-        StudentEnt savedStudent = studentService.createNewStudent(stud);
-        long savedStudentId = savedStudent.getId();
+        StudentEntity studentDB = studentRepository.save(student);
 
-
-        Optional<StudentEnt> result = studentService.updateStudentEmploymentStatus(savedStudentId, true);
-        assertEquals(result.get().getId(),savedStudentId);
-        assertEquals(result.get().getIsWorking(), true);
+        assertThat(studentDB).isNotNull();
+        assertThat(studentService.createNewStudent(studentDB)).isEqualTo(student);
     }
+
+    @Test
+    void getStudentsTest() throws Exception {
+        createNewStudent();
+
+        assertThat(studentRepository.findAll().size()).isNotZero();
+        assertThat(studentService.getAllStudents()).contains(new StudentEntity(1, "Antonio", "Buonanno", false));
+    }
+
+    @Test
+    void getByIdTest(){
+       StudentEntity student = new StudentEntity();
+        student.setName("Antonio");
+        student.setSurname("Buonanno");
+        student.setIsWorking(false);
+
+        studentRepository.save(student);
+        StudentEntity studentFind = studentRepository.findById(student.getId()).get();
+        assertThat(studentFind.getId()).isNotNull();
+        assertThat(studentFind.getId()).isEqualTo(student.getId());
+        assertThat(studentService.getStudentById(student.getId())).isEqualTo(Optional.of(student));
+    }
+
+    @Test
+    void updateStatusStudent(){
+        StudentEntity student = new StudentEntity();
+        student.setName("Antonio");
+        student.setSurname("Buonanno");
+
+        studentRepository.saveAndFlush(student);
+
+
+        assertThat(studentService.updateStudentEmploymentStatus(1,true)).isEqualTo(studentService.getStudentById(1));
+
+    }
+
+    @Test
+    void deleteStudentTest(){
+        StudentEntity student = new StudentEntity();
+        student.setName("Antonio");
+        student.setSurname("Buonanno");
+        student.setIsWorking(false);
+
+        studentRepository.saveAndFlush(student);
+
+
+        assertThat(studentService.deleteStudent(1)).isNull();
+        assertThat(studentService.getAllStudents().size()).isZero();
+    }
+
+
 }

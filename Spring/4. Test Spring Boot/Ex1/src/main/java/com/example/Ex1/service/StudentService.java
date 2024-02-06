@@ -1,7 +1,7 @@
 package com.example.Ex1.service;
 
-import com.example.Ex1.ent.StudentEnt;
-import com.example.Ex1.repo.StudentRepo;
+import com.example.Ex1.entities.StudentEntity;
+import com.example.Ex1.repositories.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,39 +13,35 @@ import java.util.Optional;
 public class StudentService {
 
     @Autowired
-    private StudentRepo studentRepo;
+    private StudentRepository studentRepository;
 
-    public StudentEnt createNewStudent(StudentEnt studentEnt) {
-//        StudentEnt student = new StudentEnt();
-//        student.setName(studentEnt.getName());
-//        student.setSurname(studentEnt.getSurname());
-//        student.setIsWorking(studentEnt.getIsWorking());
-        return studentRepo.save(studentEnt);
+    public StudentEntity createNewStudent(StudentEntity studentEntity) {
+        return studentRepository.save(studentEntity);
     }
 
-    public List<StudentEnt> getAllStudents() {
-        return studentRepo.findAll();
+    public List<StudentEntity> getAllStudents() {
+        return studentRepository.findAll();
     }
 
-    public Optional<StudentEnt> getStudentById(long id) {
-        return studentRepo.findById(id);
+    public Optional<StudentEntity> getStudentById(long id) {
+        return studentRepository.findById(id);
     }
 
-    public Optional<StudentEnt> updateStudentEmploymentStatus(long id, Boolean working) {
-        Optional<StudentEnt> studentToUpdate = studentRepo.findById(id);
+    public Optional<StudentEntity> updateStudentEmploymentStatus(long id, Boolean working) {
+        Optional<StudentEntity> studentToUpdate = studentRepository.findById(id);
         if ((studentToUpdate.isPresent())) {
             studentToUpdate.get().setIsWorking(working);
-            studentRepo.save(studentToUpdate.get());
+            studentRepository.save(studentToUpdate.get());
             return studentToUpdate;
         }
         return Optional.empty();
     }
 
     public Boolean deleteStudent(long id) {
-        boolean studentExists = studentRepo.existsById(id);
+        boolean studentExists = studentRepository.existsById(id);
         if (studentExists) {
-            studentRepo.deleteById(id);
+            studentRepository.deleteById(id);
         }
-        return true;
+        return null;
     }
 }

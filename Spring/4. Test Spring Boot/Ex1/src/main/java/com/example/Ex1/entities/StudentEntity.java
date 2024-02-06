@@ -1,17 +1,21 @@
-package com.example.Ex1.ent;
+package com.example.Ex1.entities;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Data
-@Table (name = "students")
+@Table(name = "students")
+@AllArgsConstructor
+@NoArgsConstructor
 
-public class StudentEnt {
+public class StudentEntity {
 
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
     @Column(nullable = false)
     private String name;
@@ -19,6 +23,6 @@ public class StudentEnt {
     @Column(nullable = false)
     private String surname;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private Boolean isWorking;
 }
