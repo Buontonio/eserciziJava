@@ -40,6 +40,6 @@ public class FlightService {
     }
 
     public List<FlightEntity> viewFlights() {
-        return flightRepository.findAll();
+        return flightRepository.showAllFlights();
     }
 }

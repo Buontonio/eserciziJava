@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table
+@Table(name = "flights")
 
 public class FlightEntity {
 
