@@ -56,15 +56,19 @@ public class FlightService {
         return flightRepository.getPagedFlights(pageable);
     }
 
-    public List<FlightEntity> getFlightsByStatus(String desiredStatus) {
-        List<FlightEntity> allFLights = flightRepository.findAll();
-        List<FlightEntity> desiredFlights = new ArrayList<>();
-        for (FlightEntity f : allFLights) {
-            if (f.getFlightStatus().toString().equals(desiredStatus)) {
-                desiredFlights.add(f);
-            }
-        }
-        return desiredFlights;
+//    public List<FlightEntity> getFlightsByStatus(String desiredStatus) {
+//        List<FlightEntity> allFLights = flightRepository.findAll();
+//        List<FlightEntity> desiredFlights = new ArrayList<>();
+//        for (FlightEntity f : allFLights) {
+//            if (f.getFlightStatus().toString().equals(desiredStatus)) {
+//                desiredFlights.add(f);
+//            }
+//        }
+//        return desiredFlights;
+//    }
+
+    public List<FlightEntity> findByStatus(FlightStatus status) {
+        return flightRepository.findFlightByFlightStatus(status);
     }
 
     public List<FlightEntity> getFlightsByCustomStatus(String stat1, String stat2) {

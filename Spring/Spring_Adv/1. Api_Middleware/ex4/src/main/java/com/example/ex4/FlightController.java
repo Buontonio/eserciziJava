@@ -31,8 +31,8 @@ public class FlightController {
     }
 
     @GetMapping("/get/flights/byStatus")
-    public List<FlightEntity> getFlightsByStatus(@RequestParam(name = "desiredStatus") String desiredStatus) {
-        return flightService.getFlightsByStatus(desiredStatus);
+    public List<FlightEntity> getFlightsByStatus(@RequestParam(name = "desiredStatus") FlightStatus desiredStatus) {
+        return flightService.findByStatus(desiredStatus);
     }
 
     @GetMapping("/get/flights/byCustomStatuses")

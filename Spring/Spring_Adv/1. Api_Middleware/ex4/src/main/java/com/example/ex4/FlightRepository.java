@@ -21,4 +21,6 @@ public interface FlightRepository extends JpaRepository<FlightEntity, Long> {
     @Query(value = "SELECT * FROM flights WHERE flight_status = :p1 OR flight_status = :p2", nativeQuery = true)
     List<FlightEntity> getFlightsOfStatuses(@Param(value = "p1") String stat1, @Param(value = "p2") String stat2);
 
+    List<FlightEntity> findFlightByFlightStatus(FlightStatus status);
+
 }
