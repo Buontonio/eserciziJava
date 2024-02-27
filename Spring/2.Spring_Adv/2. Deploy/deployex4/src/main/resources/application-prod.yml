@@ -1,0 +1,5 @@
+server:
+  port: 5000
+  profile: prod
+
+welcomeMsg: Hello form Prod
