@@ -1,0 +1,11 @@
+logging.level.root: INFO
+logging.level.com.example.ex1logging.services: DEBUG
+spring:
+  output:
+    ansi:
+      enabled: ALWAYS
+
+
+
+pippo: "2"
+pluto: "8"
