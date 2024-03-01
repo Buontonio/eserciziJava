@@ -20,12 +20,12 @@ public class MainController {
     }
 
     @GetMapping("/exp")
-    public void exponent() {
-        calcService.calcExp();
+    public String exponent() {
+        return calcService.calcExp();
     }
 
     @GetMapping("/get-errors")
-    public void newError() {
-        calcService.throwError();
+    public String newError() {
+        return calcService.throwError();
     }
 }
